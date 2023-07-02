@@ -1,5 +1,4 @@
 from random import randrange
-import time
 
 def display_board(a,b,c,d,e,f,g,h,i):
     print("**********************************************\n")
@@ -16,8 +15,7 @@ def display_board(a,b,c,d,e,f,g,h,i):
     print("\n|  ",g,"  |  ",h,"  |  ",i,"  |")
     print("\n|       |       |       |")
     print("\n+-------+-------+-------+\n")
-    print("**********************************************")
-    
+    print("**********************************************")    
     return
 
 def enter_move():
@@ -90,7 +88,6 @@ list_escolha = []
 list_possibilidade = [ 1, 2, 3, 4, 6, 7, 8, 9, 0]
 list_atualiza = [ 1, 2, 3, 4, 5, 6, 7, 8, 9]
 status = True
-
 a = list_atualiza[0]
 b = list_atualiza[1]
 c = list_atualiza[2]
@@ -103,34 +100,20 @@ i = list_atualiza[8]
 
 display_board(1,2,3,4,5,6,7,8,9)
 while (len(list_escolha) < 9 and status == True):
-    
     if status:
         play = enter_move()
-
         status = atualiza_quadro()
-
-       #print(list_atualiza)
-       #
-       # if status == False:
-       #    atualiza_quadro()
-       #    break
-       #     
     if status:
         play = draw_move()
-        '''
-        #print(list_atualiza)
-        status = victory_for(a,b,c,d,e,f,g,h,i, play)
-'''
         status = atualiza_quadro()
+        
         if status == False:
             break
     else:
         break
+        
 if status == True:
     print("****************Empate!!!*********************")
     print("***************Fim de Jogo********************")
 else:
     print("***************Fim de Jogo********************")
-
-    
-
