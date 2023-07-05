@@ -1,4 +1,5 @@
 from random import randrange
+import time
 
 def display_board(a,b,c,d,e,f,g,h,i):
     print("**********************************************\n")
@@ -15,27 +16,31 @@ def display_board(a,b,c,d,e,f,g,h,i):
     print("\n|  ",g,"  |  ",h,"  |  ",i,"  |")
     print("\n|       |       |       |")
     print("\n+-------+-------+-------+\n")
-    print("**********************************************")    
+    print("**********************************************")
+    
     return
 
 def enter_move():
     while True:
-        posicao_play = int(input("Player: "))
-        if posicao_play > 0 and posicao_play < 10:
-            if posicao_play not in list_escolha:
-                list_escolha.append(posicao_play)
-                list_atualiza[posicao_play - 1] = '0'
-                return "Jogador"
+        try:
+            posicao_play = int(input("Player: "))
+            if posicao_play > 0 and posicao_play < 10:
+                if posicao_play not in list_escolha:
+                    list_escolha.append(posicao_play)
+                    list_atualiza[posicao_play - 1] = '0'
+                    return "Jogador"
+                else:
+                    print("Valor já foi escolhido!!!")
             else:
-                print("Valor já foi escolhido!!!")
-        else:
-            print("Valor dever ser entre 1 e 9!!!")
-
+                print("Valor dever ser entre 1 e 9!!!")
+        except:
+            print("Valor invalido digite um numero de 1 a 9!!!")
+            
+        
 def draw_move():
     for elem in list_possibilidade:
         z = 1 + randrange(len(list_possibilidade))
-        #print("Posicao Escolhida pelo PC: ", z)
-        if z not in list_escolha:
+        if z not in list_escolha and z != 0:
             list_atualiza[z - 1] = 'X'
             list_escolha.append(z)
             print("Computador:", z)
@@ -88,6 +93,7 @@ list_escolha = []
 list_possibilidade = [ 1, 2, 3, 4, 6, 7, 8, 9, 0]
 list_atualiza = [ 1, 2, 3, 4, 5, 6, 7, 8, 9]
 status = True
+
 a = list_atualiza[0]
 b = list_atualiza[1]
 c = list_atualiza[2]
@@ -100,20 +106,26 @@ i = list_atualiza[8]
 
 display_board(1,2,3,4,5,6,7,8,9)
 while (len(list_escolha) < 9 and status == True):
-    if status:
+
+   
+    if status and len(list_escolha) < 9:
         play = enter_move()
+
         status = atualiza_quadro()
-    if status:
+
+    if status and len(list_escolha) < 9:
         play = draw_move()
+    
         status = atualiza_quadro()
-        
         if status == False:
             break
     else:
         break
-        
 if status == True:
     print("****************Empate!!!*********************")
     print("***************Fim de Jogo********************")
 else:
     print("***************Fim de Jogo********************")
+
+    
+
